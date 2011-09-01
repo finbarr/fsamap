@@ -26,18 +26,18 @@ var handler = new htmlparser.DefaultHandler(function(error, dom) {
 				}
 			});
 			address = address.substring(0, address.length - 1);
-			select(dom, '#additionalInformation .InfoBusinessTypeContainer').forEach(function(info) {
-				_.each(info.children, function(child) {
-					console.log(util.inspect(child));
-					// create a map of heading:data (and possibly turn data into an array if it is comma separated)
-				});
-			});
+			var btype = select(dom, '#ctl00_ContentPlaceHolder1_uxBusinessType')[0].children[0].data;
+			var idate = select(dom, '#ctl00_ContentPlaceHolder1_uxBusinessLastInspection')[0].children[0].data;
+			var lauth = select(dom, '#ctl00_ContentPlaceHolder1_uxLocalAuthorityName')[0].children[0].data;
 			console.log(bname);
 			console.log(address);
+			console.log(btype);
+			console.log(idate);
+			console.log(lauth);
 		} else {
+			console.log('Invalid id');
 			// id is invalid
 		}
-		//ding('#localAuthority .InfoLAContainer');
 	}
 });
 
