@@ -8,9 +8,11 @@ var app = express.createServer();
 var http = require('http');
 var util = require('util');
 
-var _ = require('underscore');
+//var _ = require('underscore');
 
 var select = require('soupselect').select;
+
+var ratings = [];
 
 var handler = new htmlparser.DefaultHandler(function(error, dom) {
 	if(error) {
@@ -29,14 +31,21 @@ var handler = new htmlparser.DefaultHandler(function(error, dom) {
 			var btype = select(dom, '#ctl00_ContentPlaceHolder1_uxBusinessType')[0].children[0].data;
 			var idate = select(dom, '#ctl00_ContentPlaceHolder1_uxBusinessLastInspection')[0].children[0].data;
 			var lauth = select(dom, '#ctl00_ContentPlaceHolder1_uxLocalAuthorityName')[0].children[0].data;
-			console.log(bname);
-			console.log(address);
-			console.log(btype);
-			console.log(idate);
-			console.log(lauth);
+			var status = select(dom, '#InfoStatus img')[0];
+			if(!status) {
+				status = select(dom, '#InfoGradeContainer img')[0];
+			}
+			status = status.attribs.src;
+			if(ratings.indexOf(status) < 0) {
+				ratings.push(status);
+				console.log(status);
+			}
+//			console.log(bname);
+//			console.log(address);
+//			console.log(btype);
+//			console.log(idate);
+//			console.log(lauth);
 		} else {
-			console.log('Invalid id');
-			// id is invalid
 		}
 	}
 });
