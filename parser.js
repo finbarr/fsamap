@@ -12,8 +12,6 @@ var util = require('util');
 
 var select = require('soupselect').select;
 
-var ratings = [];
-
 var handler = new htmlparser.DefaultHandler(function(error, dom) {
 	if(error) {
 		console.log(error.message);
@@ -36,15 +34,12 @@ var handler = new htmlparser.DefaultHandler(function(error, dom) {
 				status = select(dom, '#InfoGradeContainer img')[0];
 			}
 			status = status.attribs.src;
-			if(ratings.indexOf(status) < 0) {
-				ratings.push(status);
-				console.log(status);
-			}
-//			console.log(bname);
-//			console.log(address);
-//			console.log(btype);
-//			console.log(idate);
-//			console.log(lauth);
+			console.log(status);
+			console.log(bname);
+			console.log(address);
+			console.log(btype);
+			console.log(idate);
+			console.log(lauth);
 		} else {
 		}
 	}
